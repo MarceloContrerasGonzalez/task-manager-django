@@ -1,0 +1,19 @@
+{% comment %} 
+esta pagina funciona como un html normal, pero con la diferencia de que 
+se pueden usar las variables de contexto que se pasan desde la vista
+{% endcomment %}
+
+{% comment %} 
+-en django se usa {% %} para indicar que se va a usar una variable de contexto
+-estas variables se pasan desde la vista hasta la plantilla
+{% endcomment %}
+
+{% if latest_question_list %}
+    <ul>
+    {% for pregunta in latest_question_list %}
+        <li><a href="{% url 'polls:detail' pregunta.id %}">{{ pregunta.texto_pregunta }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay encuestas disponibles.</p>
+{% endif %}
