@@ -1,6 +1,12 @@
-<h1>{{pregunta.texto_pregunta}}</h1>
-<ul>
+<form action="{% url 'polls:vote' pregunta.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>{{ pregunta.texto_pregunta }}</h1></legend>
+    {% if error_message %}<p><strong>{{ error_message}}</strong></p> {% endif %}
     {% for eleccion in pregunta.eleccion_set.all %}
-        <li>{{ eleccion.texto_eleccion }} </li>
+        <input type="radio" name="eleccion" id="eleccion{{ forloop.counter }}" value="{{ eleccion.id }}">
+        <label for="eleccion{{ forloop.counter }}">{{ eleccion.texto_eleccion }}</label><br>
     {% endfor %}
-</ul>
+</fieldset>
+<input type="submit" value= "Voto">
+</form>
